@@ -1,0 +1,18 @@
+        #include <iostream>
+int main(){
+	char s[100];
+	char c = 'a';
+	int loc;
+	scanf("%s", s);
+	for(c='a'; c<='z'; c++) {
+	loc = -1;
+		for(int i=0; s[i] != '\0'; i++)
+			if(s[i] == c){
+				loc=i;
+				break;
+			}
+		printf("%d", loc);
+		if(c!='z') printf(" ");
+	}
+	return 0;
+}
