@@ -1,29 +1,25 @@
 #include <iostream>
-#include <algorithm>
 #include <vector>
 using namespace std;
 
-void solution(int* t, int* p, int n) {
-	int tmp;
-	vector<int> cost(n + 1, 0);
+int solution(vector<int>& t, vector<int>& p) {
+	int n = t.size();
+	vector<int> f(n+1, 0);
 	for(int i=1; i<=n; i++) {
-	if(i+t[i]-1 > n) continue;
-
+		for(int j=0; j<i; j++) {
+			if(f[j] > f[i]) f[i] = f[j];
+			if(j+t[j] == i && f[j]+p[j] > f[i]) f[i] = f[j] + p[j];
+		}
 	}
-	cout << cost[n];
-	return;
+	return f[n];
 }
-
 int main() {
 	int n;
 	cin.tie(0);
 	cin >> n;
-	int* t = new int[n + 1];
-	int* p = new int[n + 1];
-	for (int i = 1; i <= n; i++)
+	vector<int> t(n), p(n);
+	for(int i=0; i<n; i++)
 		cin >> t[i] >> p[i];
-	solution(t, p, n);
-	delete[] t;
-	delete[] p;
+	printf("%d", solution(t, p));
 	return 0;
 }
